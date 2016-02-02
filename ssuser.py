@@ -49,7 +49,7 @@ class ss_user():
 
 	def offline(self):
 		cmd1='kill '+self.getpid()	
-		cmd2='rm '+self.pidpos()
+		cmd2='rm '+self.pidpos
 		(status, output) = commands.getstatusoutput(cmd1)
 		(status, output) = commands.getstatusoutput(cmd2)
 
@@ -69,10 +69,14 @@ def Sleep():
 # 	Sleep()
 # Run()
 def test():
-	tst_user=ss_user('lhj','20150101','~/config_lhj.json','@')
-	print tst_user.getpid()
-	print tst_user.stat()
-	tst_user.offline();
+	he=ss_user('fa','20150101','~/config_father.json','@')
+	#if he.stat() == False :
+	#	fa.online()
+	he.online()
+	he.online()
+	print he.getpid()
+	print he.stat()
+	#he.offline();
 	# print type(datetime.now())
 # (status, output) = commands.getstatusoutput('sublime ~/tst')
 # (status, output) = commands.getstatusoutput('python ~/tst.py')
