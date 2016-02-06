@@ -1,0 +1,10 @@
+{
+  "fa": {
+    "mail_addr": "@", 
+    "name": "fa", 
+    "command": "ss-server -c ~/config_father.json -f /tmp/ss_fa.pid", 
+    "deadline": "20160206", 
+    "pidpos": "/tmp/ss_fa.pid", 
+    "configpos": "~/config_father.json"
+  }
+}

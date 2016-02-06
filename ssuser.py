@@ -4,27 +4,28 @@ import time
 from datetime import datetime,timedelta
 import pickle
 import commands
+import json
+def date2str(mydate):
+	return mydate.strftime("%Y%m%d")
 
-def print_date(mytime):
-	return str(mytime.year)+'.'+str(mytime.month)+'.'+str(mytime.day)
+def str2date(mystr):
+	return datetime.strptime(mystr,"%Y%m%d")
 
+def MyUsrInit(name,configpos,mail_addr,deadline =date2str(datetime.now())):
+	d={}
+	d['name']=name
+	d['deadline']=deadline
+	d['configpos']=configpos
+	d['mail_addr']=mail_addr
+	d['pidpos']=os.path.join('/tmp','ss_'+name+'.pid')
+	d['command']='ss-server'+' -c '+d['configpos']+' -f '+d['pidpos']
+	return d
+class MyUsr():
+	def __init__(self,dd):
+		self.dict=dd
 
-class ss_user():
-	def __init__(self,name,deadline,configpos,mail_addr):
-		self.name=name
-		self.deadline=deadline
-		self.configpos=configpos
-		self.mail_addr=mail_addr
-		self.pidpos=os.path.join('/tmp','ss_'+name+'.pid')
-		self.command='ss-server'+' -c '+self.configpos+' -f '+self.pidpos
-	
-	def extend_deadline(self,month_num):
-		self.deadline=max(self.deadline,datetime.now())+timedelta(30*month_num)
-
-	def print_infomations(self):
-		print "Name:"+self.name
-		print "Deadline:"+print_date(self.deadline)
-		print self.command
+	def extend_deadline(self,num):
+		self.dict['deadline']=date2str(max(str2date(self.dict['deadline']),datetime.now())+timedelta(num))
 
 	def getpid(self):
 		try:
@@ -45,43 +46,50 @@ class ss_user():
 		return False
 
 	def online(self):
-		(status, output) = commands.getstatusoutput(self.command)
+		if not self.stat():
+			(status, output) = commands.getstatusoutput(self.dict['command'])
 
 	def offline(self):
-		cmd1='kill '+self.getpid()	
-		cmd2='rm '+self.pidpos
-		(status, output) = commands.getstatusoutput(cmd1)
-		(status, output) = commands.getstatusoutput(cmd2)
+		if self.stat():
+			try:			
+				cmd1='kill '+self.getpid()	
+				cmd2='rm '+self.dict['pidpos']
+				(status, output) = commands.getstatusoutput(cmd1)
+				(status, output) = commands.getstatusoutput(cmd2)
+			except:
+				pass
 
 
-def Run():
-	f = open("myss_log",'rb')
-	d= pickle.load(f)
-	for x in d:
-		print 1
-		d.print_infomations()
-	f.close()
+
 	
 def Sleep():
 	time.sleep(3)
-# while True:
-# 	Run()
-# 	Sleep()
-# Run()
+
 def test():
-	he=ss_user('fa','20150101','~/config_father.json','@')
+	he=MyUsr(MyUsrInit(name = 'fa',configpos = '~/config_father.json', mail_addr ='@'))
 	#if he.stat() == False :
 	#	fa.online()
 	he.online()
-	he.online()
 	print he.getpid()
-	print he.stat()
+	print he.dict
+	he.extend_deadline(3)
+	print he.dict
 	#he.offline();
 	# print type(datetime.now())
-# (status, output) = commands.getstatusoutput('sublime ~/tst')
+# (status, output) = commands.getstatusoutput('sublime ~/tst') 	
 # (status, output) = commands.getstatusoutput('python ~/tst.py')
 
 # print status
 # print output 
 # print '123'+'32'
-test()
+#print datetime.now()
+#test()
+# aaa=123
+# print aaa.__name__
+# usrlist=[]
+# json.dumps(obj)
+# encodejson = json.dumps(usrlist,indent=2)
+# print encodejson
+
+
+
