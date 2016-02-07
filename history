@@ -1,0 +1,28 @@
+2016-02-06 22:58:17	Command: init
+2016-02-06 22:58:17	Successfully init
+2016-02-06 22:58:17	Command: add    name= dfa  ,configpos= ~/config_father.json  ,mail_addr= @
+2016-02-06 22:58:19	Successfully add
+2016-02-06 23:01:07	Command: init
+2016-02-06 23:01:07	Successfully init
+2016-02-06 23:01:07	Command: add   name= dfa,  configpos= ~/config_father.json,  mail_addr= @
+2016-02-06 23:02:26	Command: init
+2016-02-06 23:02:26	Successfully init
+2016-02-06 23:02:26	Command: add   name= dfa,  configpos= ~/config_father.json,  mail_addr= @
+2016-02-06 23:03:14	Command: init
+2016-02-06 23:03:14	Successfully init
+2016-02-06 23:03:14	Command: add   name= dfa,  configpos= ~/config_father.json,  mail_addr= @
+2016-02-06 23:03:16	Error Logic(0):   Cancel
+2016-02-06 23:03:28	Command: init
+2016-02-06 23:03:28	Successfully init
+2016-02-06 23:03:28	Command: add   name= dfa,  configpos= ~/config_father.json,  mail_addr= @
+2016-02-06 23:03:29	Error Logic(0):   Cancel
+2016-02-06 23:04:00	Command: init
+2016-02-06 23:04:00	Successfully init
+2016-02-06 23:04:00	Command: add   name= lihongji,  configpos= ~/config.json,  mail_addr= acerlawson@gmail.com
+2016-02-06 23:04:03	Successfully add
+2016-02-06 23:08:13	Command: init
+2016-02-06 23:08:13	Successfully init
+2016-02-06 23:08:13	Command: add   name= lihongji,  configpos= ~/config.json,  mail_addr= acerlawson@gmail.com
+2016-02-06 23:08:23	Error Logic(0):   Cancel
+2016-02-06 23:08:26	Error Input(1):   no command
+2016-02-06 23:08:34	Error Input(1):   Need 4 parameter

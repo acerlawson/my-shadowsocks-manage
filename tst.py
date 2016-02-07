@@ -1,8 +1,12 @@
-class he():
-	def __init__(self,a,b):
-		self.a=a
-		self.b=b
+#!/usr/bin/env python
+import os
+import time
+from datetime import datetime,timedelta
+import pickle
+import commands
+import json
+import sys
+import sslib
+import copy
 
-
-h=he(b= 123,a = 234)
-print h.a,h.b
+print datetime.now().strftime("%F %H:%M:%S")

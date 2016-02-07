@@ -1,7 +1,8 @@
+﻿
 ss-manage是用于管理shadowsocks服务器端的各个进程的简单管理
 
-环境:
-版本：centos 6.7/ubuntu 14.04
+运行环境:
+os：centos 6.7/ubuntu 14.04
 编译环境：python 2.6/2.7
 
 
@@ -14,10 +15,29 @@ ss-manage是用于管理shadowsocks服务器端的各个进程的简单管理
 
 -------------------------
 
-打算分开写两部分
+实现：
+	1、sslib.py 包括了需要基本的类（如端口）和一些中间函数（如格式转化）
 
-1.myss_manage用于进程运行的管理，参考本地文件，在后台长期运行
+		class MyUsr()
+			属性设计考虑再三，最后打算简单地用dict实现
+			包括了初始化，上线，下线，输出等函数
 
-2.myss_edit用于进程参数的管理，编辑本地文件，需要编辑时才运行
+		def Judge()用于和管理员交互的函数(y/n?)
+
+		def Error()用于错误输出
+			暂定：
+				type 0：逻辑错误，无非是想反馈修改失败的信息
+				type 1：输入非法
+				type 2：未知错误
+
+		def Inhistory()将过程写入history中
+
+
+			
+	2、ssedit.py包括对用户信息的更新，包括添删用户、延长时间等，被操作的具体文件是 usrlist.json
+
+	3、（未实现）ssrun.py 如果可以打算写成服务或着什么的在后台运行，每隔着一段时间，自动加载usrlist.json ，托管ss进程
+	4、（未实现）ssmail.py通过ssrun调用，通过给用户发送提醒信息
+
 
 

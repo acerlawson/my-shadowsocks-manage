@@ -5,26 +5,54 @@ from datetime import datetime,timedelta
 import pickle
 import commands
 import json
-def date2str(mydate):
-	return mydate.strftime("%Y%m%d")
 
+def Judge(question):
+	question=question+" ......y/n?"
+	respon = raw_input(question)
+	if respon[0]=='y' or respon[0]=='Y':
+		return True
+	return False
+def Inhistory(info):
+	f=open('history','a')
+	print info
+	f.write(datetime.now().strftime("%F %H:%M:%S")+'	'+info+'\n')
+	f.close()
+
+def Success(Suinfo):
+	info='Successfully '+Suinfo
+	Inhistory(info)
+def Error(Errnum,Errinfo):
+	if Errnum == 0:
+		Errtype='Logic'
+	elif Errnum ==1:
+		Errtype='Input'
+	else:
+		Errtype='Unknown'
+
+	info='Error '+Errtype+'('+str(Errnum)+')'+':   '+Errinfo
+	Inhistory(info)
+
+
+def date2str(mydate):
+	return mydate.strftime("%F")
 def str2date(mystr):
-	return datetime.strptime(mystr,"%Y%m%d")
+	return datetime.strptime(mystr,"%F")
 
 def MyUsrInit(name,configpos,mail_addr,deadline =date2str(datetime.now())):
 	d={}
-	d['Name']=name
-	d['Deadline']=deadline
-	d['Configpos']=configpos
-	d['Mail_addr']=mail_addr
-	d['Pidpos']=os.path.join('/tmp','ss_'+name+'.pid')
-	d['Command']='ss-server'+' -c '+d['Configpos']+' -f '+d['Pidpos']
+	d['name']=name
+	d['deadline']=deadline
+	d['configpos']=configpos
+	d['mail_addr']=mail_addr
+	d['pidpos']=os.path.join('/tmp','ss_'+name+'.pid')
+	d['command']='ss-server'+' -c '+d['configpos']+' -f '+d['pidpos']
 	return d
 class MyUsr():
 	def __init__(self,dd):
 		self.dict=dd
 
-	def extend_deadline(self,num):
+	def extend(self,num):
+		print num
 		self.dict['deadline']=date2str(max(str2date(self.dict['deadline']),datetime.now())+timedelta(num))
 
 	def getpid(self):
@@ -63,11 +91,11 @@ class MyUsr():
 		print usrjson
 
 
-def ErrorPrint(ErrType,ErrInfo):
-	if ErrType == 1:
-		print 'Input Error','(',ErrType,')',':',ErrInfo
 
 
+	
+def Sleep():
+	time.sleep(3)
 
 def test():
 	he=MyUsr(MyUsrInit(name = 'fa',configpos = '~/config_father.json', mail_addr ='@'))
