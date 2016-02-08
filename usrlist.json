@@ -1,1 +1,18 @@
-{}
+{
+  "acer": {
+    "mail_addr": "acerlawson@163.com", 
+    "configpos": "/home/acerlawson/config.json", 
+    "deadline": "2016-02-24", 
+    "command": "ss-server -c /home/acerlawson/config.json -f /tmp/ss_acer.pid", 
+    "pidpos": "/tmp/ss_acer.pid", 
+    "name": "acer"
+  }, 
+  "wangzhan": {
+    "mail_addr": "wangzhan@122.com", 
+    "name": "wangzhan", 
+    "command": "ss-server -c /home/acerlawson/test.config -f /tmp/ss_wangzhan.pid", 
+    "deadline": "2016-02-08", 
+    "pidpos": "/tmp/ss_wangzhan.pid", 
+    "configpos": "/home/acerlawson/test.config"
+  }
+}

@@ -26,3 +26,57 @@
 2016-02-06 23:08:23	Error Logic(0):   Cancel
 2016-02-06 23:08:26	Error Input(1):   no command
 2016-02-06 23:08:34	Error Input(1):   Need 4 parameter
+2016-02-08 14:28:20	Error Input(1):   no command
+2016-02-08 14:29:27	Command: add   name= acer,  configpos= /home/acerlawson/config.json,  mail_addr= acerlawson@gmail.com
+2016-02-08 14:29:32	Successfully add
+2016-02-08 14:38:22	online acer
+2016-02-08 14:41:20	Routine inspection
+2016-02-08 14:41:20	online acer
+2016-02-08 14:41:37	Routine inspection
+2016-02-08 14:41:37	online acer
+2016-02-08 14:41:37	End inspection
+2016-02-08 14:41:47	Routine inspection
+2016-02-08 14:41:47	online acer
+2016-02-08 14:41:47	End inspection
+2016-02-08 14:41:57	Routine inspection
+2016-02-08 14:41:57	online acer
+2016-02-08 14:41:57	End inspection
+2016-02-08 14:42:07	Routine inspection
+2016-02-08 14:42:07	online acer
+2016-02-08 14:42:07	End inspection
+2016-02-08 14:42:17	Routine inspection
+2016-02-08 14:42:17	online acer
+2016-02-08 14:42:17	End inspection
+2016-02-08 14:42:27	Routine inspection
+2016-02-08 14:42:27	online acer
+2016-02-08 14:42:27	End inspection
+2016-02-08 14:42:37	Routine inspection
+2016-02-08 14:42:37	online acer
+2016-02-08 14:42:37	End inspection
+2016-02-08 17:28:21	Error Unknown(2):   Cannot send mail
+2016-02-08 17:29:13	Send mail successfully to acer
+2016-02-08 17:33:19	Command: extend   name= acer,  days= 4
+2016-02-08 17:34:19	Command: extend   name= acer,  days= 4
+2016-02-08 17:34:42	Command: extend   name= acer,  days= 4
+2016-02-08 17:35:32	Command: extend   name= acer,  days= 4
+2016-02-08 17:36:22	Command: extend   name= acer,  days= 4
+2016-02-08 17:37:17	Command: extend   name= acer,  days= 4
+2016-02-08 17:39:47	Command: extend   name= acer,  days= 4
+2016-02-08 17:40:48	Command: extend   name= acer,  days= 4
+2016-02-08 17:40:55	Successfully extend acer to 2016-02-12
+2016-02-08 17:42:18	Error Input(1):   no command
+2016-02-08 17:42:21	Command: extend   name= acer,  days= 4
+2016-02-08 17:42:23	Successfully extend acer to 2016-02-16
+2016-02-08 17:42:38	Command: extend   name= acer,  days= 4
+2016-02-08 17:42:39	Successfully extend acer to 2016-02-20
+2016-02-08 17:42:40	Send mail successfully to acer
+2016-02-08 17:43:57	Error Input(1):   no command
+2016-02-08 17:44:00	Command: extend   name= acer,  days= 4
+2016-02-08 17:44:01	Error Logic(0):   Cancel
+2016-02-08 17:44:18	Command: extend   name= acer,  days= 4
+2016-02-08 17:44:19	Successfully extend acer to 2016-02-24
+2016-02-08 17:44:20	Send mail successfully to acer
+2016-02-08 17:48:02	Send mail successfully to acer
+2016-02-08 17:48:52	Send mail successfully to acer
+2016-02-08 17:51:10	Command: add   name= wangzhan,  configpos= /home/acerlawson/test.config,  mail_addr= wangzhan@122.com
+2016-02-08 17:51:30	Successfully add

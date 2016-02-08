@@ -6,6 +6,25 @@ import pickle
 import commands
 import json
 
+
+def GetEtc():
+	f=open('ssetc.json','rb')
+	ssetc=json.loads(f.read())
+	f.close()
+	return ssetc
+
+def GetUsrList():
+	f=open("usrlist.json",'rb')
+	usrlist=json.loads(f.read())
+	f.close()
+	return usrlist
+
+def SaveUsrList(usrlist):
+	f=open("usrlist.json",'wb')
+	f.write(json.dumps(usrlist,indent=2))
+	f.close()
+	return True
+
 def Judge(question):
 	question=question+" ......y/n?"
 	respon = raw_input(question)
@@ -17,6 +36,7 @@ def Inhistory(info):
 	print info
 	f.write(datetime.now().strftime("%F %H:%M:%S")+'	'+info+'\n')
 	f.close()
+
 
 def Success(Suinfo):
 	info='Successfully '+Suinfo
@@ -34,26 +54,39 @@ def Error(Errnum,Errinfo):
 
 
 def date2str(mydate):
-	return mydate.strftime("%F")
+	return mydate.strftime("%Y-%m-%d")
 def str2date(mystr):
-	return datetime.strptime(mystr,"%F")
+	return datetime.strptime(mystr,'%Y-%m-%d')
+def nowdate():
+	return date2str(datetime.now())
 
-def MyUsrInit(name,configpos,mail_addr,deadline =date2str(datetime.now())):
+def MyUsrInit(name,configpos,mail_addr,deadline =nowdate()):
 	d={}
 	d['name']=name
 	d['deadline']=deadline
 	d['configpos']=configpos
 	d['mail_addr']=mail_addr
-	d['pidpos']=os.path.join('/tmp','ss_'+name+'.pid')
+
+	piddir='/tmp'
+	try:
+		ssetc=GetEtc()
+		piddir=ssetc['piddir']
+	except:
+		Error(2,'No piddir in json')
+	d['pidpos']=os.path.join(piddir,'ss_'+name+'.pid')
+	
 	d['command']='ss-server'+' -c '+d['configpos']+' -f '+d['pidpos']
+	
 	return d
 class MyUsr():
 	def __init__(self,dd):
 		self.dict=dd
 
 	def extend(self,num):
-		print num
-		self.dict['deadline']=date2str(max(str2date(self.dict['deadline']),datetime.now())+timedelta(num))
+		# print num
+		print '------------------------'
+		print str2date(self.dict['deadline'])
+		self.dict['deadline']=date2str(str2date(max(self.dict['deadline'],nowdate))+timedelta(num))
 
 	def getpid(self):
 		try:
@@ -86,6 +119,24 @@ class MyUsr():
 				(status, output) = commands.getstatusoutput(cmd2)
 			except:
 				pass
+
+	def check(self):
+		oldstat=self.stat()
+		
+		if self.dict['deadline']<=nowdate:
+			self.offline()
+		else:
+			self.online()
+		newstat=self.stat()
+
+		if oldstat == newstat :
+			return 'keep'
+
+		elif oldstat == False and newstat ==True:	
+			return 'turnon'
+
+		elif oldstat == True and  oldstat == False:
+			return 'turnoff'
 	def  usrprint(self):
 		usrjson=json.dumps(self.dict,indent = 4)
 		print usrjson
@@ -106,22 +157,5 @@ def test():
 	print he.dict
 	he.extend_deadline(3)
 	print he.dict
-	#he.offline();
-	# print type(datetime.now())
-# (status, output) = commands.getstatusoutput('sublime ~/tst') 	
-# (status, output) = commands.getstatusoutput('python ~/tst.py')
-
-# print status
-# print output 
-# print '123'+'32'
-#print datetime.now()
-#test()
-# aaa=123
-# print aaa.__name__
-# usrlist=[]
-# json.dumps(obj)
-# encodejson = json.dumps(usrlist,indent=2)
-# print encodejson
-
 
 
