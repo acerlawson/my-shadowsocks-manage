@@ -84,15 +84,17 @@ class MyUsr():
 
 	def extend(self,num):
 		# print num
-		print '------------------------'
-		print str2date(self.dict['deadline'])
+		# print '------------------------'
+		# print str2date(self.dict['deadline'])
 		self.dict['deadline']=date2str(str2date(max(self.dict['deadline'],nowdate))+timedelta(num))
 
 	def getpid(self):
 		try:
+			print '123123123123'
 			f=open(self.pidpos,'r')
 			num=f.read()
 			f.close()
+			print num
 			return str(int(num))
 		except:
 			return None
@@ -100,7 +102,7 @@ class MyUsr():
 		#0 -> offline ,1 -> online
 		mypid=self.getpid()
 		if mypid :
-			cmd='ps '+mypid;
+			cmd='ps '+mypid
 			(status, output) = commands.getstatusoutput(cmd)
 			if output.find(mypid) >= 0:
 				return True
@@ -125,14 +127,14 @@ class MyUsr():
 
 	def check(self):
 		oldstat=self.stat()
-		print oldstat()
+		print oldstat
 
 		if self.dict['deadline']<=nowdate:
 			self.offline()
 		else:
 			self.online()
 		newstat=self.stat()
-		print newstat()
+		print newstat
 		if oldstat == newstat :
 			return 'keep'
 
