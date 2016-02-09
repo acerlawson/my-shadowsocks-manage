@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sslib
 import os
 import time
@@ -38,18 +39,18 @@ def Check():
 # usr = usrlist['acer']
 # TurnOff(usr)
 def Start():
+	sslib.Inhistory('Command: '+'Start')
 	try:
-		pidpos=ssetc['pidpos']
+		piddir=ssetc['piddir']
 	except:
-		pidpos='/tmp'
-		
+		piddir='/tmp'
+	pidpos=os.path.join(piddir,'ssrun.pid')
 	try:		
 		pid = os.fork()
 		if pid:
 			return
-		os.chdir(pidpos)
-		f=open('ssrun.pid','a')
-		print type(os.getpid())
+		f=open(pidpos,'a')
+		# print type(os.getpid())
 		f.write(str(os.getpid())+'\n')
 		f.close()
 		os.setsid()
@@ -58,7 +59,7 @@ def Start():
 		return
 	sslib.Inhistory('Start Run')
 	while 1:
-		# Check()
+		Check()
 		ssetc=sslib.GetEtc()	
 		try:
 			sleep=ssetc['sleep']
@@ -68,22 +69,23 @@ def Start():
 
 
 def Stop():
+	sslib.Inhistory('Command: '+'Stop')
 	try:
-		pidpos=ssetc['pidpos']
+		piddir=ssetc['piddir']
 	except:
-		pidpos='/tmp'
+		piddir='/tmp'
+	pidpos=os.path.join(piddir,'ssrun.pid')
 	try:	
-		os.chdir(pidpos)
-		f=open('ssrun.pid','r')
-		for i in f.read().split('\n'):
-			try:
-				if len(i) >0:
-					print i
-					(status, output) = commands.getstatusoutput('kill '+i)
-					print output
-			except:
-				pass
+		f=open(pidpos,'r')
+		txt=f.read().split('\n')
 		f.close()
-		os.remove('ssrun.pid')
+		for i in txt:
+			if len(i) >0:
+				# print i
+				(status, output) = commands.getstatusoutput('kill '+i)
+				# print output
+		
+		os.remove(pidpos)
+		sslib.Success('Stop')
 	except:
 		sslib.Error(2,'Cannot Stop')

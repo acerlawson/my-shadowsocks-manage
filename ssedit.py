@@ -83,7 +83,7 @@ def RemoveUsr(name):
 
 
 
-Go()
+# Go()
 #sslib.Inhistory('123')
 # UsrListInit()
 # AddUsr(name = 'lihongji',configpos = '~/config.json', mail_addr ='acerlawson@gmail.com')

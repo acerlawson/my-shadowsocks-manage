@@ -1,7 +1,8 @@
+#!/usr/bin/env python
 import sslib
-import ssrun
+import ssexe
 import ssedit
-
+import sys
 def Go():	
 	if len(sys.argv) > 1:
 		if sys.argv[1] == 'init':
@@ -17,10 +18,9 @@ def Go():
 			return
 
 		if sys.argv[1] == 'check':
-			ssrun.Check()
+			ssexe.Check()
 			return
 
-		if sys.argv[1] == 'close':
 		
 		if sys.argv[1] == 'add':
 			if len(sys.argv) != 5:
@@ -43,3 +43,5 @@ def Go():
 			ssedit.Extend(sys.argv[2],int(sys.argv[3]))
 			return
 	sslib.Error(1,'no command')
+
+Go()

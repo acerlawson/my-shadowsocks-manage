@@ -88,3 +88,36 @@
 2016-02-09 20:35:45	Command: extend   name = acer,  days = 30
 2016-02-09 20:35:48	Successfully extend acer to 2016-03-25
 2016-02-09 20:35:49	Send mail successfully to acer
+2016-02-09 23:20:12	Command: add   name= acerlawson,  configpos= /home/acerlawson/ac.config,  mail_addr= acerlawson@gmail.com
+2016-02-09 23:20:12	Error Unknown(2):   No piddir in json
+2016-02-09 23:20:13	Successfully add
+2016-02-09 23:20:28	Start Run
+2016-02-09 23:20:37	Error Input(1):   no command
+2016-02-09 23:21:21	Error Unknown(2):   Cannot Stop
+2016-02-09 23:23:11	Command: Start
+2016-02-09 23:23:11	Start Run
+2016-02-09 23:23:11	Routine check
+2016-02-09 23:23:11	End check
+2016-02-09 23:23:37	Command: Stop
+2016-02-09 23:23:37	Error Unknown(2):   Cannot Stop
+2016-02-09 23:25:01	Command: Stop
+2016-02-09 23:25:01	Error Unknown(2):   Cannot Stop
+2016-02-09 23:25:17	Command: Stop
+2016-02-09 23:25:17	Error Unknown(2):   Cannot Stop
+2016-02-09 23:25:23	Command: Stop
+2016-02-09 23:25:23	Error Unknown(2):   Cannot Stop
+2016-02-09 23:26:11	Command: Stop
+2016-02-09 23:26:11	Error Unknown(2):   Cannot Stop
+2016-02-09 23:28:04	Command: Stop
+2016-02-09 23:28:04	Error Unknown(2):   Cannot Stop
+2016-02-09 23:29:28	Command: Stop
+2016-02-09 23:29:58	Command: Stop
+2016-02-09 23:29:58	Error Unknown(2):   Cannot Stop
+2016-02-09 23:30:26	Command: Stop
+2016-02-09 23:30:26	Successfully Stop
+2016-02-09 23:31:23	Command: Start
+2016-02-09 23:31:23	Start Run
+2016-02-09 23:31:23	Routine check
+2016-02-09 23:31:23	End check
+2016-02-09 23:31:27	Command: Stop
+2016-02-09 23:31:27	Successfully Stop
