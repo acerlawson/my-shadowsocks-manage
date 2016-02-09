@@ -125,13 +125,14 @@ class MyUsr():
 
 	def check(self):
 		oldstat=self.stat()
-		
+		print oldstat()
+
 		if self.dict['deadline']<=nowdate:
 			self.offline()
 		else:
 			self.online()
 		newstat=self.stat()
-
+		print newstat()
 		if oldstat == newstat :
 			return 'keep'
 
