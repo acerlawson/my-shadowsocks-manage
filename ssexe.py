@@ -25,6 +25,7 @@ def Check():
 	for usrname in usrlist:
 		usr = sslib.MyUsr(usrlist[usrname])
 		Result = usr.check()
+		print Result
 		if Result == 'turnon':
 			Inhistory('Turn on '+usrname +'\'s service')
 			TurnOn(usrlist[usrname])
