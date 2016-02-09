@@ -1,5 +1,5 @@
 {
-	"sleeptime":7200,
+	"sleep":7200,
 	"piddir":"/tmp",
 	"mail_addr":"acerlawson@sina.com",
 	"mail_passwd":"532684712",

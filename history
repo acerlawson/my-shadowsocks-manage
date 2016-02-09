@@ -80,3 +80,11 @@
 2016-02-08 17:48:52	Send mail successfully to acer
 2016-02-08 17:51:10	Command: add   name= wangzhan,  configpos= /home/acerlawson/test.config,  mail_addr= wangzhan@122.com
 2016-02-08 17:51:30	Successfully add
+2016-02-09 20:26:29	Error Unknown(2):   Cannot send mail
+2016-02-09 20:27:45	Error Unknown(2):   Cannot send mail
+2016-02-09 20:27:51	Send mail successfully to acer
+2016-02-09 20:31:09	Send mail successfully to acer
+2016-02-09 20:32:43	Send mail successfully to acer
+2016-02-09 20:35:45	Command: extend   name = acer,  days = 30
+2016-02-09 20:35:48	Successfully extend acer to 2016-03-25
+2016-02-09 20:35:49	Send mail successfully to acer

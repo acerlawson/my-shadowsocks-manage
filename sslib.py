@@ -8,7 +8,7 @@ import json
 
 
 def GetEtc():
-	f=open('ssetc.json','rb')
+	f=open('/home/acerlawson/ssetc.json','rb')
 	ssetc=json.loads(f.read())
 	f.close()
 	return ssetc
@@ -108,7 +108,10 @@ class MyUsr():
 
 	def online(self):
 		if not self.stat():
-			(status, output) = commands.getstatusoutput(self.dict['command'])
+			try:
+				(status, output) = commands.getstatusoutput(self.dict['command'])
+			except:
+				pass
 
 	def offline(self):
 		if self.stat():
