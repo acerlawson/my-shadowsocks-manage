@@ -48,13 +48,16 @@ def  TurnOnMsg(usrd):
 
 
 def SendMail(usrd,msg):
+
 	ssetc=sslib.GetEtc()
+	if ssetc['mail'] =='off':
+		return
 	from_addr=ssetc['mail_addr']
 	passwd=ssetc['mail_passwd']
 	to_addr=usrd['mail_addr']
 	name = usrd['name']
-	admin = sslib.GetEtc()['admin']
-	
+
+	admin = ssetc['admin']
 	smtp = smtplib.SMTP() 
 	server=smtplib.SMTP("smtp.sina.com",25)
 	# server.set_debuglevel(1)
