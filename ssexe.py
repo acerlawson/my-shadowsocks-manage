@@ -41,6 +41,23 @@ def Check():
 # TurnOff(usr)
 
 def View():
+	try:
+		ssetc=sslib.GetEtc()
+		piddir=ssetc['piddir']
+	except:
+		piddir='/tmp'
+	pidpos=os.path.join(piddir,'ssrun.pid')
+	
+	if os.path.exists(pidpos):
+		f=open(pidpos,'r')
+		txt=f.read().split('\n')
+		f.close()
+		for i in txt:
+			if len(i) >0:
+				# print i
+				(status, output) = commands.getstatusoutput('ps -eo pid,etime |grep '+i)
+				print output
+				# print output
 	usrlist=sslib.GetUsrList()
 	for usrname in usrlist:
 		usr = sslib.MyUsr(usrlist[usrname])
@@ -81,13 +98,7 @@ def Start():
 def Stop():
 	sslib.Inhistory('Command: '+'Stop')
 	
-	try:
-		ssetc=sslib.GetEtc()
-		piddir=ssetc['piddir']
-	except:
-		piddir='/tmp'
 
-	pidpos=os.path.join(piddir,'ssrun.pid')
 	usrlist=sslib.GetUsrList()
 	nowdate=sslib.nowdate()
 	for usrname in usrlist:
@@ -96,6 +107,15 @@ def Stop():
 			sslib.Inhistory('Turn off '+usrname +'\'s service')
 			TurnOff(usrlist[usrname])
 	sslib.Success('Kill all service')	
+
+
+	try:
+		ssetc=sslib.GetEtc()
+		piddir=ssetc['piddir']
+	except:
+		piddir='/tmp'
+	pidpos=os.path.join(piddir,'ssrun.pid')
+
 	if os.path.exists(pidpos):
 
 		f=open(pidpos,'r')
