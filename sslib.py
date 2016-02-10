@@ -125,7 +125,7 @@ class MyUsr():
 			cmd2='rm '+self.dict['pidpos']
 			(status1, output1) = commands.getstatusoutput(cmd1)
 			(status2, output2) = commands.getstatusoutput(cmd2)
-			if status2 and status1:
+			if not self.stat():
 				return True
 		return False
 

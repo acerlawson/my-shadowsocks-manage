@@ -84,10 +84,7 @@ def Stop():
 	nowdate=sslib.nowdate()
 	for usrname in usrlist:
 		usr = sslib.MyUsr(usrlist[usrname])
-		Result=usr.offline()
-		print Result
-		print usrname
-		if Result =='turnoff':
+		if usr.offline():
 			sslib.Inhistory('Turn off '+usrname +'\'s service')
 			TurnOff(usrlist[usrname])
 	sslib.Success('Kill all service')	
