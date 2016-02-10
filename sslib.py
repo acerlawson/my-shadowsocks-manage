@@ -2,16 +2,25 @@
 import os
 import time
 from datetime import datetime,timedelta
-import pickle
 import commands
 import json
 import ssedit
 global ssdir
-
+###################################################
+#important
+#This one is differ from man to man
+#It's the dir which storage 'ssetc.json' and 'usrlist.json' and 'history'
+#'ssetc.json' is necessary before running all the process
+#how to wirte the 'ssetc.json',you can read 'readme.txt'
 ssdir='/home/acerlawson'
+###################################################
+###################################################
+###################################################
 
 def GetEtc():
+	#Read and Return ssetc
 	os.chdir(ssdir)
+	#if no such file, gg simida
 	if not os.path.exists("ssetc.json"):
 		return None
 	f=open("ssetc.json",'rb')
@@ -20,10 +29,14 @@ def GetEtc():
 	return ssetc
 
 def GetUsrList():
+	#Read and Return usrlist
 	os.chdir(ssdir)
+
+	#if no such file, create one
 	if not os.path.exists("usrlist.json"):
 		usrlist={}
 		SaveUsrList(usrlist)
+
 	f=open("usrlist.json","rb")
 	usrlist=json.loads(f.read())
 	f.close()
@@ -31,6 +44,7 @@ def GetUsrList():
 	return usrlist
 
 def SaveUsrList(usrlist):
+	#Write usrlist in 'usrlist.json'
 	os.chdir(ssdir)
 	f=open("usrlist.json","wb")
 	f.write(json.dumps(usrlist,indent=2))
@@ -38,12 +52,15 @@ def SaveUsrList(usrlist):
 	return True
 
 def Judge(question):
+	#Read the string from the keyboard and Judge yes or no ,y/n?
 	question=question+" ......y/n?"
 	respon = raw_input(question)
 	if respon[0]=='y' or respon[0]=='Y':
 		return True
 	return False
 def Inhistory(info):
+	#It's to record everything and the time
+	os.chdir(ssdir)
 	f=open('history','a')
 	print info
 	f.write(datetime.now().strftime("%F %H:%M:%S")+'	'+info+'\n')
@@ -51,9 +68,12 @@ def Inhistory(info):
 
 
 def Success(Suinfo):
+	# Successful operation
 	info='Successfully '+Suinfo
 	Inhistory(info)
+
 def Error(Errnum,Errinfo):
+	# Not good operation
 	if Errnum == 0:
 		Errtype='Logic'
 	elif Errnum ==1:
@@ -64,14 +84,17 @@ def Error(Errnum,Errinfo):
 	info='Error '+Errtype+'('+str(Errnum)+')'+':   '+Errinfo
 	Inhistory(info)
 
-
+#change date and string in my own way
 def date2str(mydate):
 	return mydate.strftime("%Y-%m-%d")
 def str2date(mystr):
 	return datetime.strptime(mystr,'%Y-%m-%d')
+
+#return the now time as string in my own way
 def nowdate():
 	return date2str(datetime.now())
 
+#Change the 'dict' to the 'MyUsr'
 def MyUsrInit(name,configpos,mail_addr,deadline =nowdate()):
 	d={}
 	d['name']=name
@@ -90,17 +113,17 @@ def MyUsrInit(name,configpos,mail_addr,deadline =nowdate()):
 	d['command']='ss-server'+' -c '+d['configpos']+' -f '+d['pidpos']
 	
 	return d
+
 class MyUsr():
 	def __init__(self,dd):
 		self.dict=dd
 
 	def extend(self,num):
-		# print num
-		# print '------------------------'
-		# print str2date(self.dict['deadline'])
+		#extend deadline
 		self.dict['deadline']=date2str(str2date(max(self.dict['deadline'],nowdate()))+timedelta(num))
 
 	def getpid(self):
+		#get pid pos and return
 		pidpos =self.dict['pidpos']
 		if os.path.exists(pidpos):
 			f=open(pidpos,'r')
@@ -110,7 +133,8 @@ class MyUsr():
 		else:
 			return None
 	def stat(self):
-		#0 -> offline ,1 -> online
+		#Judge wheter the process online
+		#False -> offline ,True-> online
 		mypid=self.getpid()
 		if mypid :
 			cmd='ps '+mypid
@@ -121,6 +145,7 @@ class MyUsr():
 		return False
 
 	def online(self):
+		#turn on
 		if not self.stat():
 			(status, output) = commands.getstatusoutput(self.dict['command'])
 			if status == 0:
@@ -128,6 +153,7 @@ class MyUsr():
 		return False
 
 	def offline(self):
+		#turn off
 		if self.stat():	
 			cmd1='kill '+self.getpid()	
 			cmd2='rm '+self.dict['pidpos']
@@ -138,6 +164,7 @@ class MyUsr():
 		return False
 
 	def check(self):
+		#check whether turn on or turn off
 		oldstat=self.stat()
 		if self.dict['deadline']<=nowdate():
 			if self.offline():
@@ -149,26 +176,15 @@ class MyUsr():
 
 
 	def  view(self):
+		#return simple information
 		name =self.dict['name']
 		deadline=self.dict['deadline']
 		stat='Online' if self.stat() else 'Offline'
 		print '%18s|%s|%s '%(name,deadline,stat)
 
+	def jsoninfo(self):
+		#return all information
+		return json.dumps(self.dict,indent=2)
 
-
-
-	
-def Sleep():
-	time.sleep(3)
-
-def test():
-	he=MyUsr(MyUsrInit(name = 'fa',configpos = '~/config_father.json', mail_addr ='@'))
-	#if he.stat() == False :
-	#	fa.online()
-	he.online()
-	print he.getpid()
-	print he.dict
-	he.extend_deadline(3)
-	print he.dict
 
 
