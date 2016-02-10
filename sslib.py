@@ -93,8 +93,9 @@ class MyUsr():
 		self.dict['deadline']=date2str(str2date(max(self.dict['deadline'],nowdate))+timedelta(num))
 
 	def getpid(self):
-		if os.path.exists(self.pidpos):
-			f=open(self.pidpos,'r')
+		pidpos =self.dict['pidpos']
+		if os.path.exists(pidpos):
+			f=open(pidpos,'r')
 			num=f.read()
 			f.close()
 			return str(int(num))
