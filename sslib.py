@@ -140,9 +140,11 @@ class MyUsr():
 		return 'keep'
 
 
-	def  usrprint(self):
-		usrjson=json.dumps(self.dict,indent = 4)
-		print usrjson
+	def  view(self):
+		name =self.dict['name']
+		deadline=self.dict['deadline']
+		stat='Online' if self.stat() else 'Offline'
+		print '%10s | %10s | %s '%(name,deadline,stat)
 
 
 

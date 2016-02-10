@@ -1,8 +1,0 @@
-{
-	"sleep":7200,
-	"piddir":"/tmp",
-	"mail_addr":"acerlawson@sina.com",
-	"mail_passwd":"532684712",
-	"smtp_server":"smtp.sina.com",
-	"admin":"Hongji Li"
-}

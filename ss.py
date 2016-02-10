@@ -17,6 +17,10 @@ def Go():
 			ssexe.Stop()
 			return
 
+		if sys.argv[1] == 'view':
+			ssexe.View()
+			return
+
 		if sys.argv[1] == 'check':
 			ssexe.Check()
 			return

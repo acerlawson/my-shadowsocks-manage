@@ -39,6 +39,14 @@ def Check():
 # usrlist=sslib.GetUsrList()
 # usr = usrlist['acer']
 # TurnOff(usr)
+
+def View():
+	usrlist=sslib.GetUsrList()
+	for usrname in usrlist:
+		usr = sslib.MyUsr(usrlist[usrname])
+		usr.view()
+
+
 def Start():
 	sslib.Inhistory('Command: '+'Start')
 
