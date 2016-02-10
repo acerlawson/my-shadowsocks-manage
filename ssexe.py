@@ -80,8 +80,17 @@ def Stop():
 		piddir='/tmp'
 
 	pidpos=os.path.join(piddir,'ssrun.pid')
-	
+	usrlist=sslib.GetUsrList()
+	nowdate=sslib.nowdate()
+	for usrname in usrlist:
+		usr = sslib.MyUsr(usrlist[usrname])
+		Result=usr.offline()
+		if Result =='turnoff':
+			sslib.Inhistory('Turn off '+usrname +'\'s service')
+			TurnOff(usrlist[usrname])
+	sslib.Success('Kill all service')	
 	if os.path.exists(pidpos):
+
 		f=open(pidpos,'r')
 		txt=f.read().split('\n')
 		f.close()
@@ -95,14 +104,7 @@ def Stop():
 		
 		os.remove(pidpos)
 
-		usrlist=sslib.GetUsrList()
-		nowdate=sslib.nowdate()
-		for usrname in usrlist:
-			usr = sslib.MyUsr(usrlist[usrname])
-			Result=usr.offline()
-			if Result =='turnoff':
-				sslib.Inhistory('Turn off '+usrname +'\'s service')
-				TurnOff(usrlist[usrname])
+		
 		sslib.Success('Stop')
 	else:
 		sslib.Error(2,'No such file')
