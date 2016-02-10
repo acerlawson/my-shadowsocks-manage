@@ -5,25 +5,29 @@ from datetime import datetime,timedelta
 import pickle
 import commands
 import json
-
+import ssedit
 
 def GetEtc():
-	if not os.path.exists("/home/acerlawson/ssetc.json"):
+	os.chdir('~')
+	if not os.path.exists("ssetc.json"):
 		return None
-	f=open("/home/acerlawson/ssetc.json",'rb')
+	f=open("ssetc.json",'rb')
 	ssetc=json.loads(f.read())
 	f.close()
 	return ssetc
 
 def GetUsrList():
+	os.chdir('~')
 	if not os.path.exists("usrlist.json"):
-		return None
+		usrlist={}
+		SaveUsrList(usrlist)
 	f=open("usrlist.json","rb")
 	usrlist=json.loads(f.read())
 	f.close()
 	return usrlist
 
 def SaveUsrList(usrlist):
+	os.chdir('~')
 	f=open("usrlist.json","wb")
 	f.write(json.dumps(usrlist,indent=2))
 	f.close()
