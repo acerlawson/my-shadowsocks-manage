@@ -24,6 +24,7 @@ def GetUsrList():
 	f=open("usrlist.json","rb")
 	usrlist=json.loads(f.read())
 	f.close()
+	print usrlist
 	return usrlist
 
 def SaveUsrList(usrlist):
