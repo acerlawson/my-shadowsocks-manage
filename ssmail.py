@@ -19,7 +19,7 @@ def  TurnOffMsg(usrd):
 	admin = sslib.GetEtc()['admin']
 	txt1='Hi ,'+name+'~\n'
 	txt2='Your Shadowsocks\' Service expires on '+deadline+'\n'
-	txt3='It was turned off on server\n'
+	txt3='It was turned off by server\n'
 	txt0='\n\n\n\n\n\nDon\'t reply this mail,which was sent by server\'s robot\nAny Problems you can get in touch with admin '+admin+'\n'
 	msg = MIMEText(txt1+txt2+txt3+txt0, 'plain', 'utf-8')
 	return msg

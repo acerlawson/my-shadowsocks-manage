@@ -37,7 +37,7 @@ def Judge(question):
 	return False
 def Inhistory(info):
 	f=open('history','a')
-	print info
+	#print info
 	f.write(datetime.now().strftime("%F %H:%M:%S")+'	'+info+'\n')
 	f.close()
 
@@ -90,7 +90,7 @@ class MyUsr():
 		# print num
 		# print '------------------------'
 		# print str2date(self.dict['deadline'])
-		self.dict['deadline']=date2str(str2date(max(self.dict['deadline'],nowdate))+timedelta(num))
+		self.dict['deadline']=date2str(str2date(max(self.dict['deadline'],nowdate()))+timedelta(num))
 
 	def getpid(self):
 		pidpos =self.dict['pidpos']
@@ -107,7 +107,7 @@ class MyUsr():
 		if mypid :
 			cmd='ps '+mypid
 			(status, output) = commands.getstatusoutput(cmd)
-			print output
+		#	print output
 			if output.find(mypid) >= 0:
 				return True
 		return False
@@ -131,7 +131,7 @@ class MyUsr():
 
 	def check(self):
 		oldstat=self.stat()
-		if self.dict['deadline']<=nowdate:
+		if self.dict['deadline']<=nowdate():
 			if self.offline():
 				return 'turnoff'
 		else:
