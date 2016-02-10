@@ -6,9 +6,12 @@ import pickle
 import commands
 import json
 import ssedit
+global ssdir
+
+ssdir='/home/acerlawson'
 
 def GetEtc():
-	os.chdir('~')
+	os.chdir(ssdir)
 	if not os.path.exists("ssetc.json"):
 		return None
 	f=open("ssetc.json",'rb')
@@ -17,7 +20,7 @@ def GetEtc():
 	return ssetc
 
 def GetUsrList():
-	os.chdir('~')
+	os.chdir(ssdir)
 	if not os.path.exists("usrlist.json"):
 		usrlist={}
 		SaveUsrList(usrlist)
@@ -28,7 +31,7 @@ def GetUsrList():
 	return usrlist
 
 def SaveUsrList(usrlist):
-	os.chdir('~')
+	os.chdir(ssdir)
 	f=open("usrlist.json","wb")
 	f.write(json.dumps(usrlist,indent=2))
 	f.close()
