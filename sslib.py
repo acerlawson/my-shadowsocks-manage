@@ -27,7 +27,7 @@ def GetUsrList():
 	f=open("usrlist.json","rb")
 	usrlist=json.loads(f.read())
 	f.close()
-	print usrlist
+	# print usrlist
 	return usrlist
 
 def SaveUsrList(usrlist):
@@ -45,7 +45,7 @@ def Judge(question):
 	return False
 def Inhistory(info):
 	f=open('history','a')
-	#print info
+	print info
 	f.write(datetime.now().strftime("%F %H:%M:%S")+'	'+info+'\n')
 	f.close()
 
@@ -152,7 +152,7 @@ class MyUsr():
 		name =self.dict['name']
 		deadline=self.dict['deadline']
 		stat='Online' if self.stat() else 'Offline'
-		print '%10s | %10s | %s '%(name,deadline,stat)
+		print '%18s|%s|%s '%(name,deadline,stat)
 
 
 
