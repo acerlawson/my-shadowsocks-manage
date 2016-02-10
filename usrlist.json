@@ -1,26 +1,10 @@
 {
-  "acer": {
-    "mail_addr": "acerlawson@163.com", 
-    "configpos": "/home/acerlawson/config.json", 
-    "command": "ss-server -c /home/acerlawson/config.json -f /tmp/ss_acer.pid", 
-    "deadline": "2016-03-25", 
-    "pidpos": "/tmp/ss_acer.pid", 
-    "name": "acer"
-  }, 
   "acerlawson": {
     "mail_addr": "acerlawson@gmail.com", 
     "name": "acerlawson", 
-    "command": "ss-server -c /home/acerlawson/ac.config -f /tmp/ss_acerlawson.pid", 
-    "deadline": "2016-02-09", 
+    "command": "ss-server -c /home/acerlawson/config.json -f /tmp/ss_acerlawson.pid", 
+    "deadline": "2016-02-10", 
     "pidpos": "/tmp/ss_acerlawson.pid", 
-    "configpos": "/home/acerlawson/ac.config"
-  }, 
-  "wangzhan": {
-    "mail_addr": "wangzhan@122.com", 
-    "configpos": "/home/acerlawson/test.config", 
-    "command": "ss-server -c /home/acerlawson/test.config -f /tmp/ss_wangzhan.pid", 
-    "deadline": "2016-02-08", 
-    "pidpos": "/tmp/ss_wangzhan.pid", 
-    "name": "wangzhan"
+    "configpos": "/home/acerlawson/config.json"
   }
 }

@@ -27,10 +27,10 @@ def Check():
 		Result = usr.check()
 		print Result
 		if Result == 'turnon':
-			Inhistory('Turn on '+usrname +'\'s service')
+			sslib.Inhistory('Turn on '+usrname +'\'s service')
 			TurnOn(usrlist[usrname])
 		if Result =='turnoff':
-			Inhistory('Turn off '+usrname +'\'s service')
+			sslib.Inhistory('Turn off '+usrname +'\'s service')
 			TurnOff(usrlist[usrname])
 		
 	sslib.Inhistory('End check')
@@ -41,23 +41,24 @@ def Check():
 # TurnOff(usr)
 def Start():
 	sslib.Inhistory('Command: '+'Start')
+
+	
 	try:
+		ssetc=sslib.GetEtc()
 		piddir=ssetc['piddir']
 	except:
 		piddir='/tmp'
-	pidpos=os.path.join(piddir,'ssrun.pid')
-	try:		
-		pid = os.fork()
-		if pid:
-			return
-		f=open(pidpos,'a')
-		# print type(os.getpid())
-		f.write(str(os.getpid())+'\n')
-		f.close()
-		os.setsid()
-	except:
-		sslib.Error(2,'Run Failed')
+
+	pidpos=os.path.join(piddir,'ssrun.pid')	
+	pid = os.fork()
+	if pid:
 		return
+	os.setsid()
+	f=open(pidpos,'a')
+		# print type(os.getpid())
+	f.write(str(os.getpid())+'\n')
+	f.close()
+
 	sslib.Inhistory('Start Run')
 	while 1:
 		Check()
@@ -71,12 +72,16 @@ def Start():
 
 def Stop():
 	sslib.Inhistory('Command: '+'Stop')
+	
 	try:
+		ssetc=sslib.GetEtc()
 		piddir=ssetc['piddir']
 	except:
 		piddir='/tmp'
+
 	pidpos=os.path.join(piddir,'ssrun.pid')
-	try:	
+	
+	if os.path.exists(pidpos):
 		f=open(pidpos,'r')
 		txt=f.read().split('\n')
 		f.close()
@@ -84,9 +89,20 @@ def Stop():
 			if len(i) >0:
 				# print i
 				(status, output) = commands.getstatusoutput('kill '+i)
+				if status ==0:
+					sslib.Inhistory('Kill '+i)
 				# print output
 		
 		os.remove(pidpos)
+
+		usrlist=sslib.GetUsrList()
+		nowdate=sslib.nowdate()
+		for usrname in usrlist:
+			usr = sslib.MyUsr(usrlist[usrname])
+			Result=usr.offline()
+			if Result =='turnoff':
+				sslib.Inhistory('Turn off '+usrname +'\'s service')
+				TurnOff(usrlist[usrname])
 		sslib.Success('Stop')
-	except:
-		sslib.Error(2,'Cannot Stop')
+	else:
+		sslib.Error(2,'No such file')

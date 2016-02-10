@@ -8,19 +8,23 @@ import json
 
 
 def GetEtc():
-	f=open('/home/acerlawson/ssetc.json','rb')
+	if not os.path.exists("/home/acerlawson/ssetc.json"):
+		return None
+	f=open("/home/acerlawson/ssetc.json",'rb')
 	ssetc=json.loads(f.read())
 	f.close()
 	return ssetc
 
 def GetUsrList():
-	f=open("usrlist.json",'rb')
+	if not os.path.exists("usrlist.json"):
+		return None
+	f=open("usrlist.json","rb")
 	usrlist=json.loads(f.read())
 	f.close()
 	return usrlist
 
 def SaveUsrList(usrlist):
-	f=open("usrlist.json",'wb')
+	f=open("usrlist.json","wb")
 	f.write(json.dumps(usrlist,indent=2))
 	f.close()
 	return True
@@ -89,14 +93,12 @@ class MyUsr():
 		self.dict['deadline']=date2str(str2date(max(self.dict['deadline'],nowdate))+timedelta(num))
 
 	def getpid(self):
-		try:
-			print '123123123123'
+		if os.path.exists(self.pidpos):
 			f=open(self.pidpos,'r')
 			num=f.read()
 			f.close()
-			print num
 			return str(int(num))
-		except:
+		else:
 			return None
 	def stat(self):
 		#0 -> offline ,1 -> online
@@ -104,45 +106,39 @@ class MyUsr():
 		if mypid :
 			cmd='ps '+mypid
 			(status, output) = commands.getstatusoutput(cmd)
+			print output
 			if output.find(mypid) >= 0:
 				return True
 		return False
 
 	def online(self):
 		if not self.stat():
-			try:
-				(status, output) = commands.getstatusoutput(self.dict['command'])
-			except:
-				pass
+			(status, output) = commands.getstatusoutput(self.dict['command'])
+			if status == 0:
+				return True
+		return False
 
 	def offline(self):
-		if self.stat():
-			try:			
-				cmd1='kill '+self.getpid()	
-				cmd2='rm '+self.dict['pidpos']
-				(status, output) = commands.getstatusoutput(cmd1)
-				(status, output) = commands.getstatusoutput(cmd2)
-			except:
-				pass
+		if self.stat():	
+			cmd1='kill '+self.getpid()	
+			cmd2='rm '+self.dict['pidpos']
+			(status1, output1) = commands.getstatusoutput(cmd1)
+			(status2, output2) = commands.getstatusoutput(cmd2)
+			if status2 and status1:
+				return True
+		return False
 
 	def check(self):
 		oldstat=self.stat()
-		print oldstat
-
 		if self.dict['deadline']<=nowdate:
-			self.offline()
+			if self.offline():
+				return 'turnoff'
 		else:
-			self.online()
-		newstat=self.stat()
-		print newstat
-		if oldstat == newstat :
-			return 'keep'
+			if self.online():
+				return 'turnon'
+		return 'keep'
 
-		elif oldstat == False and newstat ==True:	
-			return 'turnon'
 
-		elif oldstat == True and  oldstat == False:
-			return 'turnoff'
 	def  usrprint(self):
 		usrjson=json.dumps(self.dict,indent = 4)
 		print usrjson

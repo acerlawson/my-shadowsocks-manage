@@ -9,4 +9,7 @@ import sys
 import sslib
 import copy
 
-print datetime.now().strftime("%F %H:%M:%S")
+
+(status, output) = commands.getstatusoutput('kill '+'14483')
+print status
+print output

@@ -18,27 +18,24 @@ def UsrListInit():
 def Extend(name,days):
 	sslib.Inhistory('Command: '+'extend   name = '+name+',  days = '+str(days))
 	usrlist=sslib.GetUsrList()
-	try:	
-		if name in usrlist:
-			oldusr=sslib.MyUsr(usrlist[name])
-			newusr=sslib.MyUsr(copy.deepcopy(oldusr.dict))
-			newusr.extend(days)
-			if sslib.Judge(oldusr.dict['deadline']+'	----->	'+newusr.dict['deadline']):
-				usrlist[name]=newusr.dict
-				if not sslib.SaveUsrList(usrlist):
-					sslib.Error(2,'cannot save')
-					return 
-				sslib.Success('extend '+name+' to '+usrlist[name]['deadline'])
-				ssmail.SendMail(usrlist[name],ssmail.ExtendMsg(usrlist[name]))
+	if name in usrlist:
+		oldusr=sslib.MyUsr(usrlist[name])
+		newusr=sslib.MyUsr(copy.deepcopy(oldusr.dict))
+		newusr.extend(days)
+		if sslib.Judge(oldusr.dict['deadline']+'	----->	'+newusr.dict['deadline']):
+			usrlist[name]=newusr.dict
+			if not sslib.SaveUsrList(usrlist):
+				sslib.Error(2,'cannot save')
+				return 
+			sslib.Success('extend '+name+' to '+usrlist[name]['deadline'])
+			ssmail.SendMail(usrlist[name],ssmail.ExtendMsg(usrlist[name]))
 
-			else:
-				sslib.Error(0,'Cancel')
-				return
 		else:
-			sslib.Error(0,'Name already exists')
+			sslib.Error(0,'Cancel')
 			return
-	except:
-		sslib.Error(2,'Something wrong')
+	else:
+		sslib.Error(0,'Name already exists')
+		return
 
 
 def AddUsr(name,configpos,mail_addr):
