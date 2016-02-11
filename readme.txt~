@@ -1,7 +1,7 @@
 ﻿__author__=acerlawson
 __mail__=acerlawson@gmail.com
 
-ss-manage是针对多个ss-server进程简单管理的小软件，非常简陋，许多地方用的还是蠢办法，但是对于一个小服务器和软件已经够用了，先试着用吧
+ss-manage是针对多个ss-server进程简单管理的小软件
 
 运行环境:
 	os：centos 6.7/ubuntu 14.04
@@ -79,7 +79,7 @@ history是记录每个管理员或程序的操作和发生的时间
 3、ssexe.py 包括ssmanage的主要运行部分，包括start、stop、check、view等，其中ssmanage是每隔着一段时间，自动加载usrlist.json，根据其内容管理shadowsocks
 
 
-4、ssmail.py 包括发送邮件提醒给用户，通过给用户发送提醒信息，包括邮件类型包括（启动/关闭/延长shadowsocks），可以自己修改代码DIY
+4、ssmail.py 包括发送邮件提醒给用户，通过给用户发送提醒信息
 
 
 

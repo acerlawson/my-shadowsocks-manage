@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+
+__author__='acerlawson'
+__email__='acerlawson@gmail.com'
+
 import sslib
 import os
 import time
@@ -7,8 +11,6 @@ import commands
 import json
 import ssmail
 
-__author__='acerlawson'
-__email__='acerlawson@gmail.com'
 
 def TurnOn(usrd):
 	#send TurnOnMsg mail to the usrd

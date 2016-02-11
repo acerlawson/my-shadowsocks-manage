@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+
+__author__='acerlawson'
+__email__='acerlawson@gmail.com'
+
 import smtplib
 from email import encoders
 from email.header import Header

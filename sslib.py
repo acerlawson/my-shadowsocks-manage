@@ -1,21 +1,27 @@
 #!/usr/bin/env python
-import os
-import time
-from datetime import datetime,timedelta
-import commands
-import json
-import ssedit
-global ssdir
+
+__author__='acerlawson'
+__email__='acerlawson@gmail.com'
 ###################################################
 #important
 #This one is differ from man to man
 #It's the dir which storage 'ssetc.json' and 'usrlist.json' and 'history'
 #'ssetc.json' is necessary before running all the process
 #how to wirte the 'ssetc.json',you can read 'readme.txt'
+global ssdir
 ssdir='/home/acerlawson'
 ###################################################
 ###################################################
 ###################################################
+
+import os
+import time
+from datetime import datetime,timedelta
+import commands
+import json
+import ssedit
+
+
 
 def GetEtc():
 	#Read and Return ssetc

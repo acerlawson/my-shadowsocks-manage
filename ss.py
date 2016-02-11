@@ -1,11 +1,12 @@
 #!/usr/bin/env python
+
+__author__='acerlawson'
+__email__='acerlawson@gmail.com'
+
 import sslib
 import ssexe
 import ssedit
 import sys
-
-__author__='acerlawson'
-__email__='acerlawson@gmail.com'
 
 def Go():	
 	if len(sys.argv) > 1:
@@ -39,7 +40,7 @@ def Go():
 		#command: add usrname cofigposition email_address
 		if sys.argv[1] == 'add':
 			if len(sys.argv) != 5:
-				sslib.Error(1,'Need 4 parameter')
+				sslib.Error(1,'Need 3 parameter')
 				return
 			ssedit.AddUsr(sys.argv[2],sys.argv[3],sys.argv[4])
 			return
@@ -57,10 +58,10 @@ def Go():
 		#command: extend usrname days
 		if sys.argv[1]=='extend':
 			if len(sys.argv)!=4:
-				sslib.Error(1,'Need 3 parameter')
+				sslib.Error(1,'Need 2 parameter')
 				return
 			ssedit.Extend(sys.argv[2],int(sys.argv[3]))
 			return
-	sslib.Error(1,'no command')
+	sslib.Error(1,'no such command')
 
 Go()

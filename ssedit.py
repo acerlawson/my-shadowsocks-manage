@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+__author__='acerlawson'
+__email__='acerlawson@gmail.com'
+
+
 import os
 import time
 from datetime import datetime,timedelta
